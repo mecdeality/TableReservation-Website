@@ -21,7 +21,7 @@ REST is a system by which customers can reserve a table and order food in advanc
     - sqlparse=0.4.1
 - Bootstrap - Most of the html classes are taken from this framework.
 ## Website's architecture
-![pic1](https://i.imgur.com/6kxRTBD.jpg)
+![pic1](https://i.imgur.com/IRNfa6v.jpeg)
 ## 👨🏼‍💻Team
 The project is made by these geeks
 * [Utegen Asylzhan](https://github.com/mecdeality)
