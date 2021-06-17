@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>REST - easy way to find a restaurant</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<script type="text/javascript" src="jquery.timepicker.min.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+
+</head>
+<style>
+	.restaurant{
+		color: black;
+	}
+	.restaurant:hover{
+		text-decoration: none;
+	}
+	.container a{
+		color: black;
+	}
+	.content{
+		border: 1px solid #f2f1f1;
+		border-radius: 4px;
+		transition: all .2s linear;
+	}
+	.content:hover{
+		border: 1px solid #95badf;
+	}
+	.image{
+		height: 167px;
+		width: 250px;
+		object-fit: fill;
+	}
+	.detail small{
+		font-family: "lato-regular", Helvetica, Arial, sans-serif;
+		color: #9d9d9d;
+	}
+</style>
+<body class="">
+	<!-- Navigation Bar -->
+	<div class="w3-bar w3-white w3-large">
+		<a href="{% url 'table-main'%}" class="w3-bar-item w3-button w3-blue w3-mobile"><i class="fa fa-cutlery w3-margin-right"></i>Logo</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Book Now</a>
+	</div>
+	<div class="container w-75 mt-5">
+		<p>
+		<h5>Active restaurants: <a href="{% url 'restaurant-add' %}" style="font-size:14px">Add a restaurant.</a></h5>
+        </p>
+		{% for restaurant, reservation in restaurants.items %}
+		<a class="restaurant" href="{% url 'admin-reservations' restaurant.id %}">
+			<div class="content d-flex justify-content-start mb-4">
+				<div class="p-0 mr-2" >
+					<img src="{% static 'table/img/interior.jpg' %}" alt="" title="" class="image"/>
+				</div>
+				<div class="detail ml-2" >
+					<h4 class="mt-2">{{restaurant.name}}</h4>
+					<small>{{restaurant.cuisines}} cuisine...</small><br>
+					<small>Average check: {{restaurant.avg_check}}$</small><br>
+					<small>Reservations: <span style="color: red">{{reservation|length}}</span></small>
+				</div>
+			</div>
+		</a>
+        {% endfor %}
+	</div>
+
+</body>
+</html>

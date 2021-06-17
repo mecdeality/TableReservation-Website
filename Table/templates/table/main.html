@@ -1,0 +1,67 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block top %}
+<section class="caption">
+    <h2 class="caption">Find Your Dream Restaurant</h2>
+    <h3 class="properties">Restaurants - Cafes - Canteens</h3>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="search" style="background-color: #2196F3;">
+		<div class="wrapper" >
+			<form action="#" method="get">
+				<input style="background-color: #2196F3;" type="text" id="search" name="search" placeholder="What are you looking for?"  autocomplete="off"/>
+				<input type="submit" id="submit_search" name="submit_search"/>
+			</form>
+			<a href="#" class="advanced_search_icon" id="advanced_search_btn"></a>
+		</div>
+
+		<div class="advanced_search" style="background-color: #2196F3; color: white;">
+			<div class="wrapper">
+				<span class="arrow"></span>
+				<form action="#" method="post">
+					<div class="search_fields">
+						<input type="text" class="float" id="date" name="check_in_date" placeholder="Date"  autocomplete="off">
+
+						<hr class="field_sep float"/>
+
+						<input type="text" class="float" id="time" name="check_out_date" placeholder="Time"  autocomplete="off">
+					</div>
+					<input style="background-color: #2196F3;" type="text" id="keywords" name="keywords" placeholder="Keywords"  autocomplete="off">
+					<input type="submit" id="submit_search" name="submit_search"/>
+				</form>
+			</div>
+		</div><!--  end advanced search section  -->
+	</section><!--  end search section  -->
+
+
+<section class="listings" >
+	<div class="wrapper">
+			{% if restaurants %}
+			<ul class="properties_list">
+				{% for restaurant in restaurants %}
+				<li>
+					<a href="{% url 'table-restaurant' restaurant.id %}">
+						<img src="{{ restaurant.preview_img.url }}" alt="" title="" class="property_img"/>
+					</a>
+					<span class="price">${{ restaurant.avg_check }}</span>
+					<div class="property_details" style="width: 100%">
+						<h1>
+							<a href="#">{{restaurant.name}}</a>
+						</h1>
+						<h2>{{restaurant.cuisines}} ... cuisine </h2>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<h3>Oops! No restaurants here. =(</h3>
+			{% endif %}
+			<div class="more_listing">
+				<a href="#" class="more_listing_btn">View More Listings</a>
+			</div>
+		</div>
+	</section>	<!--  end listing section  -->
+{% endblock %}

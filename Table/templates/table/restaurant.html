@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>{{title}}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/reset.css' %}">
+<!--	<link rel="stylesheet" type="text/css" href="{% static 'table/css/responsive.css' %}">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery-ui.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery.timepicker.min.css'%}">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'table/js/main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery.timepicker.min.js' %}"></script>
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+
+</head>
+<body class="">
+
+
+	<!-- Navigation Bar -->
+	<div class="w3-bar w3-white w3-large">
+		<a href="{% url 'table-main'  %}" class="w3-bar-item w3-button w3-blue w3-mobile"><i class="fa fa-cutlery w3-margin-right"></i>REST</a>
+		<a href="#rooms" class="w3-bar-item w3-button w3-mobile">Pictures</a>
+		<a href="#about" class="w3-bar-item w3-button w3-mobile">About</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-mobile">Contact</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Book Now</a>
+	</div>
+	<!-- Header -->
+	<header class="w3-display-container w3-content" style="max-width:1500px;">
+		<img class="w3-image" src="{{ restaurant.preview_img.url }}" alt="The Hotel" style="min-width:1000px" width="1500" height="800">
+		<div class="w3-display-left w3-padding w3-col l6 m8">
+			<div class="w3-container w3-blue">
+				<h2><i class="fa fa-cutlery w3-margin-right"></i>Make a reservation</h2>
+			</div>
+			<div class="w3-container w3-white w3-padding-16">
+				<form action="{% url 'table-reserve' restaurant.id%}" method="get">
+					<div class="w3-row-padding" style="margin:0 -16px;">
+						<div class="w3-half w3-margin-bottom">
+							<label><i class="fa fa-calendar w3-text-blue"></i> Date</label>
+							<input class="w3-input w3-border" type="text" placeholder="MM/DD/YYYY" id="date-r" name="date" required>
+						</div>
+						<div class="w3-half">
+							<label><i class="fa fa-clock-o w3-text-blue"></i> Time</label>
+							<input class="w3-input w3-border" type="text" placeholder="HH/MM" id="time-r" name="time" required>
+						</div>
+					</div>
+					<div class="w3-row-padding" style="margin:8px -8px;">
+						<!-- <div class="w3-half w3-margin-bottom">
+							<label><i class="fa fa-male"></i> Adults</label>
+							<input class="w3-input w3-border" type="number" value="1" name="Adults" min="1" max="6">
+						</div> -->
+						<div>
+							<label><i class="fa fa-user w3-text-blue"></i> Party size</label>
+							<input class="w3-input w3-border" type="number" value="0" name="size" min="0" max="6" required>
+						</div>
+					</div>
+					<button class="w3-button w3-dark-grey mt-2" type="submit"><i class="fa fa-search w3-margin-right"></i> Reserve</button>
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<!-- Page content -->
+	<div class="w3-content" style="max-width:1532px;">
+
+		<div class="w3-container w3-margin-top container" id="rooms">
+			<h3>{{restaurant.name}}</h3>
+			<p>In this page you can see any information related to the "{{ restaurant.name}}" restaurant.</p>
+		</div>
+		{% if pics %}
+		<div class="w3-container container">
+			<h3>Photos</h3>
+		</div>
+
+		<div class="container">
+		<div class="d-flex flex-wrap w-100">
+			{% for pic in pics %}
+			<div class="col-lg-4 mb-2 lg-0 d-none d-lg-block box pr-1">
+				<a class="pop"><img class="p-0" src="{{pic.img.url}}" alt="Cinque Terre" style="width:100%; height: 200px; object-fit:cover;"></a>
+			</div>
+			{% endfor %}
+
+			<div class="col-lg-4 mb-1 lg-0 d-none d-lg-block box pr-1" style="position: relative;">
+				<h2 style="position: absolute; z-index: 100;  color: white;left:50%;top:50%;transform: translate(-50%, -50%);" >+{{left}} more</h2>
+				<a class="pop"><img class="p-0" src="{{ restaurant.preview_img.url }}" alt="Cinque Terre" style="width:100%; filter: brightness(50%);height: 200px; object-fit:cover;"></a>
+			</div>
+		</div>
+		</div>
+		{% endif %}
+		<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<img src="" class="imagepreview" style="width: 100%;" >
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w3-container w3-padding-63" id="menu">
+			<div class="w3-content">
+
+				<h1 class="w3-center" style="margin-bottom:64px">THE MENU</h1>
+				<div class="w3-row w3-center w3-border w3-border-blue">
+					<a href="javascript:void(0)" onclick="openMenu(event, 'Pizza');" id="myLink">
+						<div class="w3-col s4 tablink w3-padding-large w3-hover-blue">Pizza</div>
+					</a>
+					<a href="javascript:void(0)" onclick="openMenu(event, 'Pasta');">
+						<div class="w3-col s4 tablink w3-padding-large w3-hover-blue">Salads</div>
+					</a>
+					<a href="javascript:void(0)" onclick="openMenu(event, 'Starter');">
+						<div class="w3-col s4 tablink w3-padding-large w3-hover-blue">Starter</div>
+					</a>
+				</div>
+
+				<div id="Pizza" class="w3-container menu w3-padding-32 w3-white">
+					<h4><b>Margherita</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$12.50</span></h4>
+					<p class="w3-text-grey">Fresh tomatoes, fresh mozzarella, fresh basil</p>
+					<hr>
+
+					<h4><b>Formaggio</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$15.50</span></h4>
+					<p class="w3-text-grey">Four cheeses (mozzarella, parmesan, pecorino, jarlsberg)</p>
+					<hr>
+
+					<h4><b>Chicken</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$17.00</span></h4>
+					<p class="w3-text-grey">Fresh tomatoes, mozzarella, chicken, onions</p>
+					<hr>
+
+					<h4><b>Pineapple'o'clock</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$16.50</span></h4>
+					<p class="w3-text-grey">Fresh tomatoes, mozzarella, fresh pineapple, bacon, fresh basil</p>
+					<hr>
+
+					<h4><b>Meat Town</b> <span class="w3-tag w3-red w3-round">Hot!</span><span class="w3-right w3-tag w3-dark-grey w3-round">$20.00</span></h4>
+					<p class="w3-text-grey">Fresh tomatoes, mozzarella, hot pepporoni, hot sausage, beef, chicken</p>
+					<hr>
+
+					<h4><b>Parma</b> <span class="w3-tag w3-grey w3-round">New</span><span class="w3-right w3-tag w3-dark-grey w3-round">$21.50</span></h4>
+					<p class="w3-text-grey">Fresh tomatoes, mozzarella, parma, bacon, fresh arugula</p>
+				</div>
+
+				<div id="Pasta" class="w3-container menu w3-padding-32 w3-white">
+					<h4><b>Lasagna</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span class="w3-right w3-tag w3-dark-grey w3-round">$13.50</span></h4>
+					<p class="w3-text-grey">Special sauce, mozzarella, parmesan, ground beef</p>
+					<hr>
+
+					<h4><b>Ravioli</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$14.50</span></h4>
+					<p class="w3-text-grey">Ravioli filled with cheese</p>
+					<hr>
+
+					<h4><b>Spaghetti Classica</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$11.00</span></h4>
+					<p class="w3-text-grey">Fresh tomatoes, onions, ground beef</p>
+					<hr>
+
+					<h4><b>Seafood pasta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$25.50</span></h4>
+					<p class="w3-text-grey">Salmon, shrimp, lobster, garlic</p>
+				</div>
+
+
+				<div id="Starter" class="w3-container menu w3-padding-32 w3-white">
+					<h4><b>Today's Soup</b> <span class="w3-tag w3-grey w3-round">Seasonal</span><span class="w3-right w3-tag w3-dark-grey w3-round">$5.50</span></h4>
+					<p class="w3-text-grey">Ask the waiter</p>
+					<hr>
+
+					<h4><b>Bruschetta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$8.50</span></h4>
+					<p class="w3-text-grey">Bread with pesto, tomatoes, onion, garlic</p>
+					<hr>
+
+					<h4><b>Garlic bread</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$9.50</span></h4>
+					<p class="w3-text-grey">Grilled ciabatta, garlic butter, onions</p>
+					<hr>
+
+					<h4><b>Tomozzarella</b> <span class="w3-right w3-tag w3-dark-grey w3-round">$10.50</span></h4>
+					<p class="w3-text-grey">Tomatoes and mozzarella</p>
+				</div><br>
+
+			</div>
+		</div>
+
+
+		<div class="w3-row-padding container" id="about">
+			<div class="w3-col l4 12">
+				<h3>About</h3>
+				<h6>{{ restaurant.about }}</h6>
+				<p>We accept: <i class="fa fa-credit-card w3-large"></i> <i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal w3-large"></i></p>
+			</div>
+			<div class="w3-col l8 12">
+				<!-- Image of location/map -->
+				<img src="{{ pics.0.img.url }}" class="w3-image w3-greyscale" style="width:100%;">
+			</div>
+		</div>
+
+		<div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
+			<div class="w3-third"><i class="fa fa-map-marker w3-text-blue"></i> {{restaurant.address}}</div>
+			<div class="w3-third"><i class="fa fa-phone w3-text-blue"></i> Phone: +{{restaurant.phone}}</div>
+			<div class="w3-third"><i class="fa fa-envelope w3-text-blue"></i> Email: {{restaurant.email}}</div>
+		</div>
+
+
+		<div class="w3-container container" id="contact">
+			<h2>Contact</h2>
+			<p>If you have any questions, do not hesitate to ask them.</p>
+			<i class="fa fa-map-marker w3-text-blue" style="width:30px"></i> {{restaurant.address}}<br>
+			<i class="fa fa-phone w3-text-blue" style="width:30px"></i> Phone: +{{restaurant.phone}}<br>
+			<i class="fa fa-envelope w3-text-blue" style="width:30px"> </i> Email: {{restaurant.email}}<br>
+			<div class="mt-4">
+				<form action="/action_page.php" target="_blank">
+					<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
+					<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required name="Email"></p>
+					<p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message" required name="Message"></p>
+					<p><button class="w3-button w3-black w3-padding-large" type="submit">SEND MESSAGE</button></p>
+				</form>
+			</div>
+		</div>
+
+		<!-- End page content -->
+	</div>
+
+	<div class="d-flex justify-content-center">
+		<div class="copyrights wrapper">
+			Copyright © 2015 Le Book. All Rights Reserved.
+		</div>
+		<div class="copyrights wrapper">
+			Copyright © 2015 Le Book. All Rights Reserved.
+		</div>
+	</div><!--  end footer  -->
+	<script>
+		$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');
+		})
+		$("#time-r").timepicker();
+		$("#date-r").datepicker({minDate: 0});
+		function openMenu(evt, menuName) {
+			var i, x, tablinks;
+			x = document.getElementsByClassName("menu");
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablink");
+			for (i = 0; i < x.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" w3-blue", "");
+			}
+			document.getElementById(menuName).style.display = "block";
+			evt.currentTarget.firstElementChild.className += " w3-blue";
+		}
+		document.getElementById("myLink").click();
+	</script>
+
+</body>
+</html>

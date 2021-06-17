@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+	<title>REST - easy way to find a restaurant</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/responsive.css"> -->
+	<link rel="stylesheet" type="text/css" href="jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="jquery.timepicker.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="jquery-ui.min.js"></script>
+	<script type="text/javascript" src="jquery.timepicker.min.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+
+</head>
+<body class="">
+	<!-- Navigation Bar -->
+	<div class="w3-bar w3-white w3-large">
+		<a href="{% url 'table-main'  %}" class="w3-bar-item w3-button w3-blue w3-mobile"><i class="fa fa-cutlery w3-margin-right"></i>REST</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Book Now</a>
+	</div>
+	<div class="container w-75 mt-5">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h5>Prrovide more detailed information</h5>
+            <h2>Your resrtaurant</h2>
+            <!-- <div class="d-flex flex-wrap">
+                <div><i class="fa fa-calendar w3-text-blue"></i> 12.12.2021</div>
+                <div class="mx-4"><i class="fa fa-clock-o w3-text-blue"></i> 10:00 PM</div>
+                <div><i class="fa fa-user w3-text-blue"></i> 2 people</div>
+            </div> -->
+            <br><br>
+            <h6>Details:</h6>
+            <form>
+                <div class="form-group">
+                    <label for="name" class="m-0">Restaurant name</label><br>
+                    <small>Your restaurant name will be shown in the main page of a website</small>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Restaurant name" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="avg_check" class="m-0">Average check</label><br>
+                        <small>What is the average check of the restaurant?</small>
+                        <input type="number" class="form-control" id="avg_check" name="avg_check" placeholder="Ex: 100$" required>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label for="cuisines" class="m-0">Cuisines</label><br>
+                        <small>Write cuisines separated by commas if there is more than one</small>
+                        <input type="text" class="form-control" id="cuisines" name="cuisines" placeholder="Ex: Italian, Chinese, Kazakh" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="about">About your restaurant</label>
+                    <textarea class="form-control" id="about" name="about" rows="5" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="address" class="m-0"><i class="fa fa-map-marker w3-text-blue"></i> Address</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Address of a restaurant" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="phone" class="m-0"><i class="fa fa-phone w3-text-blue"></i> Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Accessible phone number of a restaurant" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email" class="m-0"><i class="fa fa-envelope w3-text-blue"></i> Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email address" required>
+                    </div>
+                </div>
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="preview" name="preview" required>
+                    <label class="custom-file-label" for="preview">Preview picture of a restaurant...</label>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="pictures" name="pictures" required multiple>
+                    <label class="custom-file-label" for="pictures">Pictures of a restaurant...</label>
+                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100" >Add</button>
+            </form>
+            <br>
+            <p class="text-muted">By clicking “Add” you agree to the Terms of Use and Privacy Policy. Standard text message rates may apply. You may opt out of receiving text messages at any time.</p>
+        </form>
+
+	</div>
+
+</body>
+</html>

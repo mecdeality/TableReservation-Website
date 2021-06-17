@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+
+<html lang="en">
+<head>
+	<title>REST - easy way to find a restaurant</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/responsive.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery-ui.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery.timepicker.min.css'%}">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'table/js/main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery.timepicker.min.js' %}"></script>
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+
+</head>
+<body class="">
+	<!-- Navigation Bar -->
+	<div class="w3-bar w3-white w3-large">
+		<a href="{% url 'table-main' %}" class="w3-bar-item w3-button w3-blue w3-mobile"><i class="fa fa-cutlery w3-margin-right"></i>Logo</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Book Now</a>
+	</div>
+	<div class="container w-75 mt-5" style="margin-bottom: 190px;">
+		<div class="mt-5 content-section">
+            <form method="post">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Sign In</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Need an account? <a class="ml-2" href="{% url 'user-registration' %}">Click here!</a>
+                </small>
+            </div>
+
+		</div>
+	</div>
+<footer style="background-color: #2196F3;">
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Policy</a></li>
+						<li><a href="#">Contact</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Restaurants</a></li>
+						<li><a href="#">Cafes</a></li>
+						<li><a href="#">Bars</a></li>
+						<li><a href="#">Canteens</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Nur-Sultan</a></li>
+						<li><a href="#">Almaty</a></li>
+						<li><a href="#">Kyzylorda</a></li>
+						<li><a href="#">Shymkent</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="about">
+					<p>Le Book - is created only to make your life easier in finding and booking any type of meal services. Hope you will find that you've been searching for :).</p>
+					<ul>
+						<li><a href="http://facebook.com" class="facebook" target="_blank"></a></li>
+						<li><a href="http://twitter.com/suicidalintentq" class="twitter" target="_blank"></a></li>
+						<li><a href="http://plus.google.com" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2021 Le Book. All Rights Reserved.
+		</div>
+	</footer><!--  end footer  -->
+</body>
+</html>

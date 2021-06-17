@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<meta charset="utf-8">
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/responsive.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery-ui.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery.timepicker.min.css'%}">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'table/js/main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery.timepicker.min.js' %}"></script>
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+	<style>
+		.alert {
+  padding: 20px;
+  background-color: #DFF2BF;
+  color: #4F8A10;
+  border: 1px solid #DFF2BF;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: #4F8A10;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+	</style>
+</head>
+<body>
+
+	<section class="hero">
+		<header style="background-color: #2196F3;">
+			<div class="wrapper" style="display: flex; justify-content: space-between;">
+				<nav>
+					<ul>
+						<li><a href="{% url 'table-main'  %}" class="w3-bar-item w3-mobile"><i class="fa fa-cutlery w3-margin-right"></i><b>REST</b></a></li>
+						{% if restaurantAcc %}
+						<li><a href="{% url 'admin-restaurants' %}">Restaurants</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+				<nav>
+					{% if user.is_authenticated %}
+					<ul>
+						<li><a href="{% url 'table-reservations' %}">
+							My Reservations
+						</a></li>
+						<li><a href="#">About</a></li>
+						{% if user.is_superuser %}
+						<li><a href="{% url 'check-request'%}" style="color:red">Requests</a></li>
+						{% else %}
+						<li><a href="#">Contact</a></li>
+						{% endif %}
+					</ul>
+					<a href="{% url 'user-logout' %}" class="login_btn">Logout</a>
+					{% else %}
+					<a href="{% url 'user-login' %}" class="login_btn">Login</a>
+					{% endif %}
+				</nav>
+			</div>
+		</header><!--  end header section  -->
+
+			{% block top %}{% endblock %}
+	</section><!--  end hero section  -->
+	{% if messages %}
+		{% for message in messages %}
+		<div class="alert">
+		<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+		{{ message}}
+		</div>
+		{% endfor %}
+		{% endif %}
+	{% block content %}{% endblock %}
+
+	<footer style="background-color: #2196F3;">
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Policy</a></li>
+						<li>
+							<a href="{% url 'request-send' %}">
+								For restaurant owners
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Restaurants</a></li>
+						<li><a href="#">Cafes</a></li>
+						<li><a href="#">Bars</a></li>
+						<li><a href="#">Canteens</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Nur-Sultan</a></li>
+						<li><a href="#">Almaty</a></li>
+						<li><a href="#">Kyzylorda</a></li>
+						<li><a href="#">Shymkent</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="about">
+					<p>REST - is created only to make your life easier in finding and booking any type of meal services. Hope you will find that you've been searching for :).</p>
+					<ul>
+						<li><a href="http://facebook.com" class="facebook" target="_blank"></a></li>
+						<li><a href="http://twitter.com/suicidalintentq" class="twitter" target="_blank"></a></li>
+						<li><a href="http://plus.google.com" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2021 REST. All Rights Reserved.
+		</div>
+	</footer><!--  end footer  -->
+	<script>
+		$("#time").timepicker();
+		$("#date").datepicker();
+	</script>
+
+</body>
+</html>

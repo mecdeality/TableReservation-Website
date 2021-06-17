@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>REST - easy way to find a restaurant</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/reset.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/responsive.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery-ui.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'table/css/jquery.timepicker.min.css'%}">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'table/js/main.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'table/js/jquery.timepicker.min.js' %}"></script>
+	<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+
+</head>
+<body class="">
+	<!-- Navigation Bar -->
+	<div class="w3-bar w3-white w3-large">
+		<a href="{% url 'table-main'%}" class="w3-bar-item w3-button w3-blue w3-mobile"><i class="fa fa-cutlery w3-margin-right"></i>REST</a>
+		<a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Book Now</a>
+	</div>
+	<div class="container w-75 my-5">
+		<div class="mt-4 container">
+            {% if reqs %}
+            <h4>Requests:</h4>
+            {% for req in reqs %}
+            <form method="post">
+                {% csrf_token %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Your message</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ req.account.user.username }}</td>
+                        <td>{{ req.sendMsg }}</td>
+                        <td>
+                            <input type="text" class="form-control" id="message" name="message" placeholder="Message" required>
+                        </td>
+                        <td>
+                            <input name="acc_id" value="{{ req.account.id }}" type="hidden">
+                            <button name="accept" type="submit" class="btn btn-success" style="color:white">Accept</button>
+                            <button name="reject" type="submit" class="btn btn-danger" style="color:white">Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </form>
+            {% endfor %}
+            {% else %}
+            <h2 class="m-2">Nobody has submitted a request yet!</h2>
+            {% endif %}
+        </div>
+
+	</div>
+	<footer style="background-color: #2196F3; margin-top: 90px">
+		<div class="wrapper footer">
+			<ul>
+				<li class="links">
+					<ul>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Support</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Policy</a></li>
+						<li>
+							<a href="{% url 'request-send' %}">
+								For restaurant owners
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Restaurants</a></li>
+						<li><a href="#">Cafes</a></li>
+						<li><a href="#">Bars</a></li>
+						<li><a href="#">Canteens</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="links">
+					<ul>
+						<li><a href="#">Nur-Sultan</a></li>
+						<li><a href="#">Almaty</a></li>
+						<li><a href="#">Kyzylorda</a></li>
+						<li><a href="#">Shymkent</a></li>
+						<li><a href="#">...</a></li>
+					</ul>
+				</li>
+
+				<li class="about">
+					<p>REST - is created only to make your life easier in finding and booking any type of meal services. Hope you will find that you've been searching for :).</p>
+					<ul>
+						<li><a href="http://facebook.com" class="facebook" target="_blank"></a></li>
+						<li><a href="http://twitter.com/suicidalintentq" class="twitter" target="_blank"></a></li>
+						<li><a href="http://plus.google.com" class="google" target="_blank"></a></li>
+						<li><a href="#" class="skype"></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="copyrights wrapper">
+			Copyright © 2021 Le Book. All Rights Reserved.
+		</div>
+	</footer><!--  end footer  -->
+</body>
+</html>
