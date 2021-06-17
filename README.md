@@ -3,7 +3,7 @@ This is the source code of a table reservation website. The website is fully fun
 ## Contents
 - [General description](#general-description)
 - [Built with](#built-with)
-- [Website's architecture](#website's-architecture)
+- [Website's architecture](#website\'s-architecture)
 - [Team](#team)
 - [User manual](#user-manual)
 
