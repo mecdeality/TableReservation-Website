@@ -3,6 +3,7 @@ This is the source code of a table reservation website. The website is fully fun
 ## Contents
 - [General description](#general-description)
 - [Built with](#built-with)
+- [Website's architecture](#website's-architecture)
 - [Team](#team)
 - [User manual](#user-manual)
 
@@ -19,7 +20,8 @@ REST is a system by which customers can reserve a table and order food in advanc
     - pytz=2021.1
     - sqlparse=0.4.1
 - Bootstrap - Most of the html classes are taken from this framework.
-
+## Website's architecture
+![pic1](https://imgur.com/a/Lz6UKu7)
 ## 👨🏼‍💻Team
 The project is made by these geeks
 * [Utegen Asylzhan](https://github.com/mecdeality)
